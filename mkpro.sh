@@ -1,16 +1,26 @@
 nombreProyecto=$1
 mainFileName=$nombreProyecto
 
-
+#IF THERE IS JUST ONE ARGUMENT, THE MAINFILE NAME WILL THE SAME AS THE PROYECT NAME
 if [ $# -ne 1 ]
   then
     mainFileName=$2
 fi
 
+
 #MAIN FOLDER IS CREATED
 mkdir $nombreProyecto
 
-#LOOP OVER ARGUMENTS
+
+#MAIN FILE IS CREATED
+echo program $mainFileName>> $nombreProyecto/$mainFileName.f95
+echo -e '\t'use precision>> $nombreProyecto/$mainFileName.f95
+echo -e '\t'implicit none>> $nombreProyecto/$mainFileName.f95
+echo >> $nombreProyecto/$mainFileName.f95
+echo end program $mainFileName>> $nombreProyecto/$mainFileName.f95
+
+
+#LOOP OVER ARGUMENTS, CREATING FILES
 arguments=("$@")
 nargin=${#arguments[*]} #Number of arguments
 #A file with the name of each file is created
@@ -24,14 +34,6 @@ do
 done
 
 
-
-#MAIN FILE IS CREATED
-echo program $mainFileName>> $nombreProyecto/$mainFileName.f95
-echo -e '\t'use precision>> $nombreProyecto/$mainFileName.f95
-echo -e '\t'implicit none>> $nombreProyecto/$mainFileName.f95
-echo >> $nombreProyecto/$mainFileName.f95
-echo end program $mainFileName>> $nombreProyecto/$mainFileName.f95
-
 #INPUT DATA .DAT FILE IS CREATED
 echo >> $nombreProyecto/$mainFileName.dat
 
@@ -40,6 +42,7 @@ echo module precision >> $nombreProyecto/precision.f95
 echo -e '\t'implicit none>> $nombreProyecto/precision.f95
 echo -e '\t'integer, parameter:: pr=8>> $nombreProyecto/precision.f95
 echo end module >> $nombreProyecto/precision.f95
+
 
 #MAKEFILE IS CREATED
 echo '#'Fortran Makefile >> $nombreProyecto/makefile
