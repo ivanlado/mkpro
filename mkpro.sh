@@ -1,11 +1,23 @@
 nombreProyecto=$1
+originalProyectName=$nombreProyecto
 mainFileName=$nombreProyecto
+
 
 #IF THERE IS JUST ONE ARGUMENT, THE MAINFILE NAME WILL THE SAME AS THE PROYECT NAME
 if [ $# -ne 1 ]
   then
     mainFileName=$2
 fi
+
+
+#IF A FOLDER WITH THE SAME PROYECT NAME ALREADY EXISTS, NAME IS CHANGED
+#BY APPENDING A NUMBER
+i=2
+while [ -e $nombreProyecto ]
+do
+	nombreProyecto=$originalProyectName$i
+	i=$(($i + 1))
+done
 
 
 #MAIN FOLDER IS CREATED
