@@ -69,7 +69,7 @@ echo 'OBJS = $(SRCS:.f95=.o)' >> $nombreProyecto/makefile
 echo 'ejecutar: $(OUTPUT) clean txt' >> $nombreProyecto/makefile
 echo -e '\t''@echo "Compilación finaliza. Comienza la ejecutación."' >> $nombreProyecto/makefile
 echo -e '\t''@echo ''' >> $nombreProyecto/makefile
-echo -e '\t''./$< < ./$<.dat > ./$<.txt' >> $nombreProyecto/makefile
+echo -e '\t''./$< < ./$<.dat |tee ./$<.txt' >> $nombreProyecto/makefile
 
 echo '$(OUTPUT): $(OBJS)' >> $nombreProyecto/makefile
 echo -e '\t''$(CC) -o $(OUTPUT) $(OBJS)' >> $nombreProyecto/makefile
