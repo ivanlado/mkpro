@@ -87,3 +87,7 @@ echo 'txt:' >> $nombreProyecto/makefile
 echo -e '\t''@echo > $(OUTPUT).txt' >> $nombreProyecto/makefile
 
 cd $nombreProyecto
+
+#COMPILAMOS EL MÓDULO: Se generan un .mod y un .o. Eliminamos el .o
+f95 -c precision.f95
+rm precision.o
